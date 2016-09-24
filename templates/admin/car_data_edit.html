@@ -1,0 +1,150 @@
+{% extends 'admin/layout.html' %} 
+
+{% block main %}
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            CarData 
+            <small>编辑 CarData</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">CarData</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">CarData</h3>
+                  <button id="save-nowfeed"  class="btn-save btn btn-success btn-sm pull-right" data-id="{{view_data.id}}">保存信息</button>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select id="data_type" class="form-control" >
+                        <option {% if view_data.data_type == 'car_brand' %} selected="selected" {% endif %}>car_brand</option>
+                        <option {% if view_data.data_type == 'car_vender' %} selected="selected" {% endif %}>car_vender</option>
+                        <option {% if view_data.data_type == 'car_model' %} selected="selected" {% endif %}>car_model</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>car_size</label>
+                      <input id="car_size" type="text" class="form-control" value="{{view_data.car_size or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>car_sort</label>
+                      <input id="car_sort" type="text" class="form-control" value="{{view_data.car_sort or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input id="name" type="text" class="form-control" value="{{view_data.name or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Pinyin</label>
+                      <input id="pinyin" type="text" class="form-control" value="{{view_data.pinyin or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>English</label>
+                      <input id="english" type="text" class="form-control" value="{{view_data.english or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Thumb</label>
+                      <input id="thumb" type="text" class="form-control" value="{{view_data.thumb or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Cover</label>
+                      <input id="cover" type="text" class="form-control" value="{{view_data.cover or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Tag_id</label>
+                      <input id="tag_id" type="text" class="form-control" value="{{view_data.tag_id or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>order_num</label>
+                      <input id="order_num" type="text" class="form-control" value="{{view_data.order_num or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>brand_id</label>
+                      <input id="brand_id" type="text" class="form-control" value="{{view_data.brand_id or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>brand_name</label>
+                      <input id="brand_name" type="text" class="form-control" value="{{view_data.brand_name or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>vender_id</label>
+                      <input id="vender_id" type="text" class="form-control" value="{{view_data.vender_id or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>vender_name</label>
+                      <input id="vender_name" type="text" class="form-control" value="{{view_data.vender_name or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>fgcolor</label>
+                      <input id="fgcolor" type="text" class="form-control" value="{{view_data.fgcolor or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>bgcolor</label>
+                      <input id="bgcolor" type="text" class="form-control" value="{{view_data.bgcolor or ''}}"/>
+                    </div>
+                  </form>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!--/.col (right) -->
+          </div>
+
+        </section><!-- /.content -->
+{% endblock %}
+
+{% block javascript %}
+<!-- InputMask -->
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+$(document).on('click', '#save-nowfeed', function() {
+  var car_data_id = $(this).attr('data-id');
+  $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    url: "/admin/cardata/edit/" + car_data_id,
+    data: JSON.stringify({
+      data_type: $('#data_type').val(),
+      car_size: $('#car_size').val(),
+      car_sort: $('#car_sort').val(),
+      name: $('#name').val(),
+      pinyin: $('#pinyin').val(),
+      english: $('#english').val(),
+      thumb: $('#thumb').val(),
+      cover: $('#cover').val(),
+      tag_id: $('#tag_id').val(),
+      order_num: $('#order_num').val(),
+      brand_id: $('#brand_id').val(),
+      brand_name: $('#brand_name').val(),
+      vender_id: $('#vender_id').val(),
+      vender_name: $('#vender_name').val(),
+      fgcolor: $('#fgcolor').val(),
+      bgcolor: $('#bgcolor').val(),
+    }),
+    success: function(msg) {
+      if (msg.success == 0) {
+        window.location.replace("/admin/carbrands");
+      }
+    },
+    error: function(msg) {
+      alert("error");
+    }
+  });         
+});
+</script>
+{%endblock%}

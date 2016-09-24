@@ -1,0 +1,14 @@
+首页信息流：
+F1
+L1
+M2
+S1
+S3
+
+<object type="application/x-shockwave-flash" data="http://player.youku.com/player.php/sid/XNDUzMDQyMjE2/isAutoPlay/true/isShowRelatedVideo/false/newPlayer/true/partnerid/cb207f7268b895bb/v.swf" width="900" height="545" id="youku-player"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><param name="movie" value="http://player.youku.com/player.php/sid/XNDUzMDQyMjE2/isAutoPlay/true/isShowRelatedVideo/false/newPlayer/true/partnerid/cb207f7268b895bb/v.swf"><param name="flashvars" value="imglogo=&amp;paid=0&amp;partnerId=cb207f7268b895bb"></object>
+
+
+
+post type 车评
+
+tag type 车型

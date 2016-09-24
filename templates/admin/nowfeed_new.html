@@ -1,0 +1,123 @@
+{% extends 'admin/layout.html' %} 
+
+{% block main %}
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            NowFeed 
+            <small>新建 NowFeed</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">NowFeed</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">NowFeed</h3>
+                  <button id="save-nowfeed"  class="btn-save btn btn-success btn-sm pull-right">保存信息</button>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input id="name" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Subname</label>
+                      <input id="subname" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Avatar</label>
+                      <input id="avatar" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Content</label>
+                      <input id="content" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Image</label>
+                      <input id="image" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Source</label>
+                      <input id="source" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Link</label>
+                      <input id="link" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select id="nowfeed_type" class="form-control" >
+                        <option>text</option>
+                        <option>image</option>
+                        <option>video</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Time</label>
+                      <input id="video_time" type="text" class="form-control"/>
+                    </div>
+                  </form>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!--/.col (right) -->
+          </div>
+
+        </section><!-- /.content -->
+{% endblock %}
+
+{% block javascript %}
+<!-- InputMask -->
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+        $("[data-mask]").inputmask({
+        mask: "y-m-d h:s:s",
+        placeholder: "yyyy-mm-dd hh:mm:ss",
+        alias: "datetime",
+        hourFormat: "24"
+    });
+});
+
+$(document).on('click', '#save-nowfeed', function() {
+  $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    url: "/admin/nowfeed/new",
+    data: JSON.stringify({
+      name: $('#name').val(),
+      subname: $('#subname').val(),
+      avatar: $('#avatar').val(),
+      content: $('#content').val(),
+      image: $('#image').val(),
+      source: $('#source').val(),
+      link: $('#link').val(),
+      nowfeed_type: $('#nowfeed_type').val(),
+      video_time: $('#video_time').val(),
+    }),
+    success: function(msg) {
+      if (msg.success == 0) {
+        window.location.replace("/admin/nowfeeds");
+      }
+    },
+    error: function(msg) {
+      alert("error");
+    }
+  });         
+});
+</script>
+{%endblock%}

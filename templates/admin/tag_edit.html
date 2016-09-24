@@ -1,0 +1,94 @@
+{% extends 'admin/layout.html' %} 
+
+{% block main %}
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            标签
+            <small>编辑标签</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">标签</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">标签</h3>
+                  <button id="save-tag" data-id="{{view_tag.id}}" class="btn-save btn btn-success btn-sm pull-right">保存信息</button>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                <form role="form">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input id="name" type="text" class="form-control" value="{{view_tag.name or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Thumb</label>
+                      <input id="thumb" type="text" class="form-control" value="{{view_tag.thumb or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Cover</label>
+                      <input id="cover" type="text" class="form-control" value="{{view_tag.cover or ''}}"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Intro</label>
+                      <textarea id="intro" type="text" class="form-control">{{view_tag.intro or ''}}</textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select id="tag_type" class="form-control" value="{{view_tag.tag_type or 'text'}}">
+                        <option {% if view_tag.tag_type == '普通标签' %} selected="selected" {% endif %}>普通标签</option>
+                        <option {% if view_tag.tag_type == '汽车品牌' %} selected="selected" {% endif %}>汽车品牌</option>
+                        <option {% if view_tag.tag_type == '汽车厂家' %} selected="selected" {% endif %}>汽车厂家</option>
+                        <option {% if view_tag.tag_type == '汽车车型' %} selected="selected" {% endif %}>汽车车型</option>
+                      </select>
+                    </div>
+                  </form>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!--/.col (right) -->
+          </div>
+
+        </section><!-- /.content -->
+{% endblock %}
+
+{% block javascript %}
+<!-- InputMask -->
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+$(document).on('click', '#save-tag', function() {
+  var tag_id = $(this).attr('data-id');
+  $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    url: "/admin/tag/edit/" + tag_id,
+    data: JSON.stringify({
+      name: $('#name').val(),
+      thumb: $('#thumb').val(),
+      cover: $('#cover').val(),
+      intro: $('#intro').val(),
+      tag_type: $('#tag_type').val(),
+    }),
+    success: function(msg) {
+      alert(msg.message);
+    },
+    error: function(msg) {
+      alert("error");
+    }
+  });         
+});
+</script>
+{%endblock%}

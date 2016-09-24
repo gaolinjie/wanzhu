@@ -1,0 +1,188 @@
+{% extends 'layout.html' %} {% block stylesheet %}
+<link rel="stylesheet" href="/static/css/post.css" />
+<link rel="stylesheet" href="/static/css/new.css" />
+<link rel="stylesheet" type="text/css" href="/static/jquery-ui-1.11.0/jquery-ui.css">
+<link href="/static/aehlke-tag-it-1d84585/css/jquery.tagit.css" rel="stylesheet" type="text/css">{% endblock %} {% block main %}
+<section id="pane-main">
+    <div id="custom-nav" data-id="index"></div>
+    <section id="main-container">
+        <div class="main-content layout-abc">
+            <section id="news-feed" class="col-b col-p" data-behavior="index_news_feed" data-minifeed="region=us&amp;headlinestack=true&amp;insider=true&amp;pubkey=espn-en-frontpage-index&amp;lang=en">
+                <div id="news-feed-content" data-count="41">
+                    <div class="container-wrapper">
+                        <div class="container">
+                            <!--no cache-->
+                            <article data-id="17145771" class="news-feed-item top news-feed-story-package no-thumb" data-pos="1">
+                                <div class="o-single-content" id="single-content-wrapper">
+                                    <div id="article-header" class="o-single-content__header">
+                                        <div class="o-single-content__body c-single-normal__header">
+                                            <span class="button-alt button-title-image">
+                                            <span>点击上传文章封面图片</span>
+                                            <input id="coverUpload" type="file" name="files" data-url="/upload/image">
+                                            </span>
+                                            <div class="c-article-header-meta">
+                                                <span class="c-article-header-meta__category">新帖</span>
+                                                <span class="c-article-header-meta__time">n 分钟前</span>
+                                            </div>
+                                            <h1 class="c-single-normal__title">
+                                              <span  class="yx-title" contenteditable="true">在这里输入文章标题</span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <div class="o-single-content__body o-single-content__body--main">
+                                        <aside id='social-bar' class="c-social-bar c-social-bar--vertical c-social-bar--colored c-social-bar--sqaured c-social-bar--left js-social-bar"></aside>
+                                        <article class="o-single-content__body__content c-article-content s-single-article js-article">
+                                            <div class="tag-bar">
+                                                <input type="hidden" name="tag" id="tagInput" value="">
+                                                <ul id="postTags" class=""></ul>
+                                            </div>
+                                            <div class="add-bar">
+                                                <a class="med button-alt button-add add-text" href="javascript:void(0);">添加文字</a>
+                                                <a class="med button-alt button-add add-image" href="javascript:void(0);">添加图片<input class="imgUpload" type="file" name="files" data-url="/upload/image"></a>
+                                                <a class="med button-alt button-add add-video" href="javascript:void(0);">添加视频</a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="now-feed" data-module="now" class="col-c" data-behavior="index_now_feed" data-now-offset="25">
+                <div class="now-feed-content">
+                    <div class="favfeed_item type-signin logged-out" style="display: block;">
+                        <div class="message">
+                            <p>Log in to ESPN or join to view your favorites</p>
+                        </div>
+                        <a class="button med register new-post" href="#" data-route="false" data-behavior="overlay" tref="/members/v5_0/register" data-regformid="espn_bbc" data-language="en" data-affiliatename="espn">发布</a>
+                        <a class="med button-alt sign-in save-post" href="#" data-route="false" data-behavior="overlay" tref="/members/v3_1/login" data-regformid="espn_bbc" data-language="en" data-affiliatename="espn">保存</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</section>
+{% endblock %} {% block javascript %}
+<script src="/static/js/jquery.sticky-kit.min.js"></script>
+<script src="/static/js/jQuery-File-Upload-9.12.5/js/vendor/jquery.ui.widget.js"></script>
+<script src="/static/js/jQuery-File-Upload-9.12.5/js/jquery.iframe-transport.js"></script>
+<script src="/static/js/jQuery-File-Upload-9.12.5/js/jquery.fileupload.js"></script>
+<script src="/static/jquery-ui-1.11.0/jquery-ui.js"></script>
+<script src="/static/aehlke-tag-it-1d84585/js/tag-it.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var nowAddBar;
+    $('#coverUpload').fileupload({
+        dataType: 'json',
+        done: function(e, data) {
+            $.each(data.result.files, function(index, file) {
+                $('#article-header').css('background-image', 'url(' + file.name + ')');
+            });
+        }
+    });
+
+    function imgUpload() {
+        $('.imgUpload').fileupload({
+            dataType: 'json',
+            done: function(e, data) {
+                $.each(data.result.files, function(index, file) {
+                    nowAddBar.after('<div class="yx-item"><img class="alignnone size-full wp-image-695550 aligncenter" src="' + file.name + '" sizes="(max-width: 720px) 100vw, 720px"><div class="yx-img-info" contenteditable="true">在这里添加图片描述</div></div><div class="add-bar"><a class="med button-alt button-add add-text" href="javascript:void(0);">添加文字</a><a class="med button-alt button-add add-image" href="javascript:void(0);">添加图片<input class="imgUpload" type="file" name="files" data-url="/upload/image"></a><a class="med button-alt button-add add-video" href="javascript:void(0);">添加视频</a></div>');
+                    imgUpload();
+                });
+            }
+        });
+    }
+    imgUpload();
+
+
+    $(document).on('click', '.add-image', function() {
+        nowAddBar = $(this).parent();
+    });
+
+    function insertTextAtCursor(text) {
+        var sel, range, html;
+        if (window.getSelection) {
+            sel = window.getSelection();
+            if (sel.getRangeAt && sel.rangeCount) {
+                range = sel.getRangeAt(0);
+                range.deleteContents();
+                range.insertNode(document.createTextNode(text));
+            }
+        } else if (document.selection && document.selection.createRange) {
+            document.selection.createRange().text = text;
+        }
+    }
+
+    $('#social-bar').stick_in_parent({
+        offset_top: 130
+    });
+    $('#now-feed').stick_in_parent({
+        offset_top: 60
+    });
+
+    $(document).on('click', '.add-text', function() {
+
+        $(this).parent().after('<div class="yx-item" contenteditable="true"></div><div class="add-bar"><a class="med button-alt button-add add-text" href="javascript:void(0);">添加文字</a><a class="med button-alt button-add add-image" href="javascript:void(0);">添加图片<input class="imgUpload" type="file" name="files" data-url="/upload/image"></a><a class="med button-alt button-add add-video" href="javascript:void(0);">添加视频</a></div>');
+        imgUpload();
+
+        $(this).parent().next().bind("paste", function(e) {
+            e.preventDefault();
+            if (e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData) {
+                var text = e.originalEvent.clipboardData.getData("text/plain");
+                document.execCommand("insertHTML", false, text);
+            } else if (window.clipboardData && window.clipboardData.getData) {
+                var text = window.clipboardData.getData("Text");
+                insertTextAtCursor(text);
+            }
+        });
+    });
+
+    var sampleTags = [];
+    $.getJSON('/get/tags', function(data) {
+        $.each(data, function(key, val) {
+            sampleTags.push(val);
+        });
+    });
+
+    $("#postTags").tagit({
+        placeholderText: '添加标签，让更多的人发现',
+        availableTags: sampleTags,
+        singleField: true,
+        allowSpaces: true, //标签中是否允许空格
+        singleFieldNode: $('#tagInput') //将值保存到mySingleField元素
+    });
+
+
+    $(document).on('click', '.new-post', function() {
+        var content = "";
+        $(".yx-item").each(function() {
+          content = content + $(this).prop("outerHTML");
+        });
+        var cover = $('#article-header').css('background-image')
+        cover = cover.replace('url(','').replace(')','').replace(/\"/gi, "");
+        var tags = $('#tagInput').val();
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/new",
+            data: JSON.stringify({
+                title: $('.yx-title').text(),
+                cover: cover,
+                content: content,
+                tags: tags,
+            }),
+            success: function(msg) {
+                if (msg.success == 0) {
+                    window.location.replace(msg.redirect);
+                }
+            },
+            error: function(msg) {
+                alert("error");
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

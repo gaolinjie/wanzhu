@@ -1,0 +1,104 @@
+{% extends 'admin/layout.html' %} 
+
+{% block main %}
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            标签 
+            <small>新建标签</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">标签</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">标签</h3>
+                  <button id="save-tag"  class="btn-save btn btn-success btn-sm pull-right">保存信息</button>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input id="name" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Thumb</label>
+                      <input id="thumb" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Cover</label>
+                      <input id="cover" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Intro</label>
+                      <input id="intro" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select id="tag_type" class="form-control" >
+                        <option>普通标签</option>
+                        <option>汽车品牌</option>
+                        <option>汽车厂家</option>
+                        <option>汽车车型</option>
+                      </select>
+                    </div>
+                  </form>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!--/.col (right) -->
+          </div>
+
+        </section><!-- /.content -->
+{% endblock %}
+
+{% block javascript %}
+<!-- InputMask -->
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+        $("[data-mask]").inputmask({
+        mask: "y-m-d h:s:s",
+        placeholder: "yyyy-mm-dd hh:mm:ss",
+        alias: "datetime",
+        hourFormat: "24"
+    });
+});
+
+$(document).on('click', '#save-tag', function() {
+  $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    url: "/admin/tag/new",
+    data: JSON.stringify({
+      name: $('#name').val(),
+      thumb: $('#thumb').val(),
+      cover: $('#cover').val(),
+      intro: $('#intro').val(),
+      tag_type: $('#tag_type').val(),
+    }),
+    success: function(msg) {
+      if (msg.success == 0) {
+        window.location.replace("/admin/tags");
+      }
+    },
+    error: function(msg) {
+      alert("error");
+    }
+  });         
+});
+</script>
+{%endblock%}

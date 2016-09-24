@@ -1,0 +1,245 @@
+{% extends 'layout.html' %} {% block stylesheet %}
+<link rel="stylesheet" href="/static/css/post.css" />
+<link rel="stylesheet" href="/static/summernote-0.5.2-dist/summernote.css"> {% endblock %} {% block main %}
+<section id="pane-main">
+    <div id="custom-nav" data-id="index"></div>
+    <section id="main-container">
+        <div class="main-content layout-abc">
+            <section id="news-feed" class="col-b col-p" data-behavior="index_news_feed" data-minifeed="region=us&amp;headlinestack=true&amp;insider=true&amp;pubkey=espn-en-frontpage-index&amp;lang=en">
+                <div id="news-feed-content" data-count="41">
+                    <div class="container-wrapper">
+                        <div class="container">
+                            <!--no cache-->
+                            <article data-id="17145771" class="news-feed-item" data-pos="1">
+                                <div class="o-single-content" id="single-content-wrapper">
+                                    <div id="article-header" class="o-single-content__header" style='background-image: url({{post.cover}})'>
+                                        <div class="o-single-content__body c-single-normal__header">
+                                            <div class="c-article-header-meta">
+                                                <span class="c-article-header-meta__category">越野</span>
+                                                <span class="c-article-header-meta__time">{{post.creater|pretty_date}}</span>
+                                            </div>
+                                            <h1 class="c-single-normal__title">{{post.title}}</h1>
+                                        </div>
+                                    </div>
+                                    <div class="o-single-content__body o-single-content__body--main">
+                                        <aside id='social-bar' class="c-social-bar c-social-bar--vertical c-social-bar--colored c-social-bar--sqaured c-social-bar--left js-social-bar" data-component="SocialBar" data-post-title="爱范儿客户端新版上线 不妥协只为做到更好" data-post-link="http%3A%2F%2Fwww.ifanr.com%2F695851" data-post-summary="终于加入了这些功能，泪奔。" data-post-id="695851" data-fixed-start="#article-content" data-fixed-end="#footer-rec-posts">
+                                            <div class="c-social-bar__counter"><b class="js-share-counter">24</b></div>
+                                            <a class="c-social-bar__icon c-social-bar__icon--weibo" data-weibo="" target="_blank" href="/api/special/changweibo/index.php?ifr_post_id=695851"></a>
+                                            <div class="c-social-bar__icon c-social-bar__icon--wechat">
+                                                <div class="c-social-bar__icon--wechat__qrcode c-popup-qrcode">
+                                                    <div class="c-popup-qrcode__title">分享到微信</div>
+                                                    <div class="js-qrcode" data-qrcode-class="c-popup-qrcode__image">
+                                                        <canvas width="256" height="256" class="c-popup-qrcode__image"></canvas>
+                                                    </div>
+                                                    <div class="c-popup-qrcode__hint">使用微信扫码将网页分享到微信</div>
+                                                </div>
+                                            </div>
+                                            <a class="c-social-bar__icon c-social-bar__icon--twitter" data-twitter="" target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=ifanr&amp;text=爱范儿客户端新版上线 不妥协只为做到更好&amp;url=http%3A%2F%2Fwww.ifanr.com%2F695851"></a>
+                                            <a class="c-social-bar__icon c-social-bar__icon--linkedin" data-linkedin="" target="_blank" href="https://www.linkedin.com/shareArticle?title=爱范儿客户端新版上线 不妥协只为做到更好&amp;url=http%3A%2F%2Fwww.ifanr.com%2F695851&amp;summary=终于加入了这些功能，泪奔。&amp;source=ifanr"></a>
+                                            <a class="c-social-bar__icon c-social-bar__icon--douban" data-douban="" target="_blank" href="http://www.douban.com/share/service?href=http%3A%2F%2Fwww.ifanr.com%2F695851&amp;name=爱范儿客户端新版上线 不妥协只为做到更好"></a>
+                                            <a class="c-social-bar__icon c-social-bar__icon--qzone" data-qzone="" target="_blank" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Fwww.ifanr.com%2F695851&amp;title=爱范儿客户端新版上线 不妥协只为做到更好"></a>
+                                            <!--<button class="c-social-bar__icon c-social-bar__icon--comments js-goto-comments" data-share-ignored></button>-->
+                                        </aside>
+                                        <div id="article-content" class="o-single-content__body__content c-article-meta">
+                                            <div class="c-article-tags">
+                                                {% for tag in tags.list %}
+                                                <a href="/t/{{tag.tag_name}}" class="c-article-tags__item">{{tag.tag_name}}</a>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="c-card-meta c-card-meta--darken c-article-sns" data-component="ArticleContentMeta" data-post-id="695851">
+                                                <button class="c-article-sns__info c-card-meta__info c-card-meta__info--comments js-article-comment-count js-goto-comments">31</button>
+                                                <button class="c-article-sns__info c-card-meta__info c-card-meta__info--like js-article-like-count">34</button>
+                                            </div>
+                                        </div>
+                                        <article class="o-single-content__body__content c-article-content s-single-article js-article">
+                                            {{post.content}}
+                                        </article>
+                                        <div class="o-single-content__body__content">
+                                            <div class="c-article-likes" data-component="ArticleLikes" data-post-id="695851">
+                                                <button class="c-article-likes__button js-article-like">赞一下</button>
+                                                <ul class="c-article-likes__avatars js-avatars">
+                                                    <li class="c-article-likes__user"><img src="http://media.ifanrusercontent.com/media/tavatar/03/5d/035d0cb05b31c913d919bdb4687624fba8828eaf.jpg" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="http://media.ifanrusercontent.com/media/tavatar/fc/0c/fc0ce1c346f3bc25ca4bb8e508e145b2750a8d5a.jpg" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="http://media.ifanrusercontent.com/media/tavatar/7a/8e/7a8ee089c7f5ce18672955c9b39a7dfb7f88ffe7.jpg" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="//cdn.ifanr.cn/ifanr/default_avatar.png" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="http://media.ifanrusercontent.com/media/user_files/uploaded/15/e4/15e4be1fecc73b9cc6bc2c742930b78590d0a775-eac17de515f5643c463c55d531ef1093cdc238df.jpg" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="//cdn.ifanr.cn/ifanr/default_avatar.png" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="http://media.ifanrusercontent.com/media/user_files/uploaded/93/03/9303c2822753cd49d345459e8325c4c42f955338-dc6bfa57cf406f73d8233fa472b8dcac92b84c4e.jpg" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="//cdn.ifanr.cn/ifanr/default_avatar.png" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="http://media.ifanrusercontent.com/media/tavatar/73/13/73131c7d9c79aacffa02456c0ba98d3ea76ed70c.jpg" alt=""></li>
+                                                    <li class="c-article-likes__user"><img src="//cdn.ifanr.cn/ifanr/default_avatar.png" alt=""></li>
+                                                    <li class="c-article-likes__counter"><span><span class="js-article-like-count">34</span> 个人</span>点赞</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="o-single-content__body__content">
+                                        <h5 class="c-card-category c-article-comments__headline">我的评论</h5>
+                                            <div class="comment-box {%if user_info == none%}unlogin{%endif%}" {%if user_info==none%}data-link="{{link}}" data-link2="{{link2}}" {%endif%}>
+                                                <img class="c-article-comments-item__avatar comment-box-avatar" src="http://gravatar.ifanrx.com/avatar/6e9069ddddb70ce78f23295b2cbc76e3?s=80&amp;d=%2F%2Fifanr.b0.upaiyun.com%2Fsite-static%2Fifanr-2.0%2Fdist%2Fimages%2Fcommon%2Fgravatar.jpg" alt="">
+                                                <div class="comment-area clear">
+                                                    <div class="reply-btn">
+                                                        <input type="submit" id="rPostBtn" data-post="{{ post.id }}" class="btn btn-sm btn-default" value="立即发布">{{ xsrf_form_html() }}</div>
+                                                    <div id="rSummernote" class="description"></div>
+                                                    <input type="hidden" name="reply" id="rReplyText" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="o-single-content__body__content">
+                                            <div id="article-comments" class="c-article-comments " data-component="ArticleCommentsComponent" data-post-id="695851">
+                                                <h5 class="c-card-category c-article-comments__headline">全部评论(<span class="js-placeholder-comments-counter">31</span>)</h5>
+                                                <div class="c-article-comments__body js-comments-body">
+                                                    <ul class="c-article-comments__list js-comments-list">
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="now-feed" data-module="now" class="col-c" data-behavior="index_now_feed" data-now-offset="25">
+                <div class="now-feed-content">
+                    <div class="user-info">
+                        <a href="/lookat/home?userId=101023" target="_blank" class="headpic">
+                            <i style="background-image: url(http://imageqiniu.xxxxxbbs.com/FqqUBTNPGP0b-MKC5ifkROWUpIsd?imageMogr2/auto-orient/thumbnail/!100x100r/gravity/Center/crop/100x100);background-repeat: no-repeat;">
+                    
+                    
+                        <b class="male"></b>
+                    
+                    
+                    <!-- <img src=''> -->
+                </i>
+                            <em>{{post.author_username}}</em>
+                        </a>
+                        <ul>
+                            <li>
+                                关注
+                                <a href="/lookat/friend?userId=101023" target="_blank">84</a>
+                            </li>
+                            <span class="line"></span>
+                            <li>
+                                粉丝
+                                <a href="/lookat/fins?userId=101023" target="_blank">1245</a>
+                            </li>
+                            <span class="line"></span>
+                            <li>
+                                作品
+                                <a href="/lookat/home?userId=101023" target="_blank">21</a>
+                            </li>
+                        </ul>
+                        <div class="button-area" userid="101023">
+                            <a href="javascript:;" class="white-button follow-btn" userid="101023" type="0"><i></i>关注</a>
+                            <a href="javascript:;" class="white-button private-btn message-button" userid="101023"><i></i>发私信</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</section>
+{% endblock %} {% block javascript %}
+<script src="/static/js/jquery.sticky-kit.min.js"></script>
+<script src="/static/summernote-0.5.2-dist/summernote.js"></script>
+<script src="/static/summernote-0.5.2-dist/summernote-zh-CN.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#social-bar').stick_in_parent({
+        offset_top: 130
+    });
+    $('#now-feed').stick_in_parent({
+        offset_top: 60
+    });
+
+    $('#rSummernote').summernote({
+        minHeight: 200, // set minimum height of editor
+        maxHeight: 600, // set maximum height of editor
+        toolbar: [
+            ['insert', ['picture', 'video', ]], // no insert buttons
+        ],
+        lang: 'zh-CN',
+        onImageUpload: function(files, editor, editable) {
+            $('.note-group-select-from-files h5').text('正在上传图片');
+            $('.note-image-input').addClass('uploading');
+            sendFile(files[0], editor, editable);
+        },
+    });
+
+    function sendFile(file, editor, editable) {
+        data = new FormData();
+        data.append("file", file);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: "/upload",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(url) {
+                editor.insertImage(editable, url);
+                $('.note-image-dialog').modal('hide');
+                $('.note-image-input').removeClass('uploading');
+                $('.note-group-select-from-files h5').text('从本地上传');
+            }
+        });
+    }
+
+    $(document).on('click', '#rPostBtn', function() {
+        var reply_text = $('#rSummernote').code();
+        if (reply_text == '<p><br></p>') {
+            return;
+        }
+        var post_id = $('#rPostBtn').attr('data-post');
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/reply/" + post_id,
+            data: JSON.stringify({
+                reply_content: reply_text,
+            }),
+            success: function(msg) {
+                if (msg.success != 0) {
+
+                } else {
+                    alert("error");
+                }
+            },
+            error: function(msg) {
+                alert("error");
+            }
+        });
+    });
+
+    $.getJSON('/reply/{{post.id}}', function(data) {
+        var all_replys_text = '';
+        var all_replys = data.list;
+        for (var i=0;i<all_replys.length;i++)
+        {
+            var reply = all_replys[i];
+            var inner_replys_text = '';
+            if (reply.reply_replys) {
+                var inner_replys = reply.reply_replys;
+                for (var j=0;j<inner_replys.length;j++)
+                {
+                    var inner_reply = inner_replys[j];
+                    inner_replys_text += '<li id="comment-'+inner_reply.id+'" class="c-article-comments-replies__item  js-single-comment" data-comment-username="'+inner_reply.author_username+'" data-comment-id="'+inner_reply.id+'"><div class="c-article-comments-replies__item__wrapper"><span class="c-article-comments-item__name">'+inner_reply.author_username+': <a class="comment-at" href="#comment-1032989" "="">@'+inner_reply.to_username+'</a></span><span class="c-article-comments-item__meta">'+inner_reply.created+'</span><a class="med button-alt up-btn" href="#">顶(0)</a><div class="c-article-comments-item__content">'+inner_reply.content+'</div><span class="c-article-comments-item__meta comment-bottom-btn comment-reply">回复</span><span class="c-article-comments-item__meta comment-bottom-btn comment-report">举报</span></div></li>';
+                }
+                if (inner_replys_text!='') {
+                    inner_replys_text='<ul class="c-article-comments-replies c-article-comments-item__info js-child-comments">'+inner_replys_text+'</ul>'
+                }
+            }
+
+            all_replys_text += '<li id="comment-'+reply.id+'" class="c-article-comments-item"><img class="c-article-comments-item__avatar" src="http://gravatar.ifanrx.com/avatar/6e9069ddddb70ce78f23295b2cbc76e3?s=80&amp;d=%2F%2Fifanr.b0.upaiyun.com%2Fsite-static%2Fifanr-2.0%2Fdist%2Fimages%2Fcommon%2Fgravatar.jpg" alt=""><div class="c-article-comments-item__info js-single-comment comment-outer" data-comment-username="'+reply.author_username+'" data-comment-id="'+reply.id+'"> <span class="c-article-comments-item__name">'+reply.author_username+'</span><span class="c-article-comments-item__meta">'+reply.created+'</span><a class="med button-alt up-btn" href="#">顶('+reply.up_num+')</a><div class="c-article-comments-item__content">'+reply.content+'</div><span class="c-article-comments-item__meta comment-bottom-btn comment-reply">回复</span><span class="c-article-comments-item__meta comment-bottom-btn comment-report">举报</span></div>'+inner_replys_text+'</li>';
+
+        }
+        if (all_replys_text!='') {
+            $('.c-article-comments__list').html(all_replys_text);
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'admin/layout.html' %} 
+
+{% block main %}
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            NewsFeed 
+            <small>新建 NewsFeed</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li class="active">NewsFeed</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">NewsFeed</h3>
+                  <button id="save-newsfeed"  class="btn-save btn btn-success btn-sm pull-right">保存信息</button>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label>layout_type</label>
+                      <select id="layout_type" class="form-control" >
+                        <option>F1</option>
+                        <option>L1</option>
+                        <option>M2</option>
+                        <option>S1</option>
+                        <option>S3</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>title</label>
+                      <input id="title" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>brief</label>
+                      <input id="brief" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>post1_id</label>
+                      <input id="post1_id" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>post2_id</label>
+                      <input id="post2_id" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>post3_id</label>
+                      <input id="post3_id" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>channel_name</label>
+                      <input id="channel_name" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>channel_img</label>
+                      <input id="channel_img" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>channel_link</label>
+                      <input id="channel_link" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>user_name</label>
+                      <input id="user_name" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>user_img</label>
+                      <input id="user_img" type="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                      <label>user_link</label>
+                      <input id="user_link" type="text" class="form-control"/>
+                    </div>
+                  </form>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!--/.col (right) -->
+          </div>
+
+        </section><!-- /.content -->
+{% endblock %}
+
+{% block javascript %}
+<!-- InputMask -->
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
+<script src="/static/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+        $("[data-mask]").inputmask({
+        mask: "y-m-d h:s:s",
+        placeholder: "yyyy-mm-dd hh:mm:ss",
+        alias: "datetime",
+        hourFormat: "24"
+    });
+});
+
+$(document).on('click', '#save-newsfeed', function() {
+  $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    url: "/admin/newsfeed/new",
+    data: JSON.stringify({
+      layout_type: $('#layout_type').val(),
+      title: $('#title').val(),
+      brief: $('#brief').val(),
+      post1_id: $('#post1_id').val(),
+      post2_id: $('#post2_id').val(),
+      post3_id: $('#post3_id').val(),
+      channel_name: $('#channel_name').val(),
+      channel_img: $('#channel_img').val(),
+      channel_link: $('#channel_link').val(),
+      user_name: $('#user_name').val(),
+      user_img: $('#user_img').val(),
+      user_link: $('#user_link').val(),
+    }),
+    success: function(msg) {
+      if (msg.success == 0) {
+        window.location.replace("/admin/newsfeeds");
+      }
+    },
+    error: function(msg) {
+      alert("error");
+    }
+  });         
+});
+</script>
+{%endblock%}

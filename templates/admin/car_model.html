@@ -1,0 +1,133 @@
+{% extends 'admin/layout.html' %} 
+
+{% block main %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    汽车型号
+    <small>所有车型</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+      <a href="/admin"> <i class="fa fa-dashboard"></i>
+        首页
+      </a>
+    </li>
+    <li class="active">汽车车型</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <a href="/admin/cardata/new?type=car-model" class="btn-save btn btn-success btn-sm">新建车型</a>
+          <div class="box-tools">
+            <div class="input-group">
+              <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+              <div class="input-group-btn">
+                <button class="btn btn-sm btn-default"> <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>PINYIN</th>
+              <th>ENGLISH</th>
+              <th>TAG</th>
+              <th>ORDER</th>
+              <th>BRAND</th>
+              <th>VENDER</th>
+              <th>操作</th>
+            </tr>
+            {% for data in all_datas.list %}
+            <tr id="data-{{data.id}}">
+              <td>{{data.id}}</td>
+              <td>{{data.name or "/"}}</td>
+              <td>{{data.pinyin or "/"}}</td>
+              <td>{{data.english or "/"}}</td>
+              <td>{{data.tag_id or "/"}}</td>
+              <td>{{data.order_num or "/"}}</td>
+              <td>{{data.brand_name or "/"}}</td>
+              <td>{{data.brand_vender or "/"}}</td>
+              <td>
+                <div class="btn-group">
+                  <a href="" type="button" class="btn btn-default btn-xs" target="_blank">
+                    <i class="fa fa-link"></i>
+                  </a>
+                  <a href="/admin/carmodel/edit/{{data.id}}" type="button" class="btn btn-default btn-xs" target="_blank">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </a>
+                  <a type="button" class="delete btn btn-default btn-xs" data-toggle="modal" data-target="#delModal" data-id="{{data.id}}" target="_blank">
+                    <i class="fa fa-trash-o"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer clearfix">
+          <ul class="pagination pagination-sm no-margin pull-right">{{ all_datas.page|pagination(request.uri) }}</ul>
+        </div>
+      </div>
+      <!-- /.box --> </div>
+  </div>
+
+</section>
+<!-- /.content -->
+
+<div id="delModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">你确定要删除这个品牌吗？</h4>
+      </div>
+      <div class="modal-body">
+        <p>如果选择确认，这个品牌将会被永久删除。</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-success" data-id="" data-type="">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+
+$(document).on('click', '.delete', function() {
+  var delete_id = $(this).attr('data-id');
+  $('#delModal .btn-success').attr('data-id', delete_id);
+});
+
+$(document).on('click', '#delModal .btn-success', function() {
+  $('#delModal').modal('hide');
+  var delete_id = $(this).attr('data-id');
+  $.getJSON('/admin/carmodel/delete/' + delete_id, function(data) {
+    if (data.success == 0) {
+      $('data-' + delete_id).hide();
+    } else {
+      alert("删除课程失败！");
+    }
+  });
+});
+
+</script>
+{% endblock %}
