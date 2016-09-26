@@ -98,6 +98,15 @@ class TagHandler(BaseHandler):
        
         self.render(self.template_path+"tag.html", **template_variables)
 
+class TagsHandler(BaseHandler):
+    def get(self, template_variables = {}):
+        user_info = self.current_user
+        template_variables["static_path"] = self.static_path
+        template_variables["user_info"] = user_info
+        p = int(self.get_argument("p", "1"))
+       
+        self.render(self.template_path+"tags.html", **template_variables)
+
 class GetTagsHandler(BaseHandler):
     def get(self, template_variables = {}):
         user_info = self.current_user
@@ -116,9 +125,6 @@ class PostHandler(BaseHandler):
         template_variables["static_path"] = self.static_path
         template_variables["user_info"] = user_info
         p = int(self.get_argument("p", "1"))
-        post = self.post_model.get_post_by_post_id(post_id)
-        template_variables["post"] = post
-        template_variables["tags"] = self.post_tag_model.get_post_all_tags(post_id)
 
         self.render(self.template_path+"post.html", **template_variables)
 

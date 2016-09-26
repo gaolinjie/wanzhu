@@ -62,6 +62,7 @@ class Application(tornado.web.Application):
             (r"/new", handler.index.NewHandler),
             (r"/t/(.*)", handler.index.TagHandler), 
             (r"/p/(\d+)", handler.index.PostHandler),
+            (r"/d/(.*)", handler.index.PostHandler),
             (r"/reply/(\d+)", handler.index.ReplyHandler),
             (r"/upload/image", handler.index.UploadImageHandler),
             (r"/signin", handler.user.SigninHandler),
@@ -85,6 +86,7 @@ class Application(tornado.web.Application):
             (r"/api/get/user/base", handler.api.GetUserBaseInfoApiHandler),
             (r"/api/update/user/base", handler.api.UpdateUserBaseInfoApiHandler),
             (r"/get/tags", handler.index.GetTagsHandler),
+            (r"/tags", handler.index.TagsHandler),
         ]
 
         tornado.web.Application.__init__(self, handlers, **settings)
