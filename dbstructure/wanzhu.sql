@@ -76,46 +76,6 @@ CREATE TABLE `post` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- ----------------------------
---  Table structure for `nowfeed`
--- ----------------------------
-DROP TABLE IF EXISTS `nowfeed`;
-CREATE TABLE `nowfeed` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `avatar` text,
-  `name` text,
-  `subname` text,
-  `content` text,
-  `image` text,
-  `source` text,
-  `link` text,
-  `nowfeed_type` text,
-  `video_time` text,
-  `created` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Table structure for `newsfeed`
--- ----------------------------
-DROP TABLE IF EXISTS `newsfeed`;
-CREATE TABLE `newsfeed` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` text,
-  `brief` text,
-  `channel_name` text,
-  `channel_img` text,
-  `channel_link` text,
-  `user_name` text,
-  `user_img` text,
-  `user_link` text,
-  `post1_id` int(11) DEFAULT NULL,
-  `post2_id` int(11) DEFAULT NULL,
-  `post3_id` int(11) DEFAULT NULL,
-  `layout_type` text,
-  `created` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `reply`
@@ -160,30 +120,5 @@ CREATE TABLE `post_tag` (
   `post_id` int(11) DEFAULT NULL,
   `tag_id` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Table structure for `car_data`
--- ----------------------------
-DROP TABLE IF EXISTS `car_data`;
-CREATE TABLE `car_data` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `data_type` text,
-  `car_size` text,
-  `car_sort` text,
-  `name` text,
-  `pinyin` text,
-  `english` text,
-  `thumb` text,
-  `cover` text,
-  `tag_id` int(11) DEFAULT NULL,
-  `order_num` text,
-  `brand_id` int(11) DEFAULT NULL,
-  `brand_name` text,
-  `vender_id` int(11) DEFAULT NULL,
-  `vender_name` text,
-  `fgcolor` text,
-  `bgcolor` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

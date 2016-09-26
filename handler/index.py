@@ -55,12 +55,6 @@ class IndexHandler(BaseHandler):
         template_variables["user_info"] = user_info
 
         p = int(self.get_argument("p", "1"))
-        all_nowfeeds = self.nowfeed_model.get_all_nowfeeds(current_page = p)
-        template_variables["all_nowfeeds"] = all_nowfeeds
-
-        all_newsfeeds = self.newsfeed_model.get_all_newsfeeds(current_page = p)
-        template_variables["all_newsfeeds"] = all_newsfeeds
-        print all_newsfeeds
 
         if(user_info):
             print 'ddd'
@@ -85,17 +79,6 @@ class IndexHandler(BaseHandler):
                 template_variables["error"] = None
         self.render(self.template_path+"index.html", **template_variables)
 
-class ReviewsHandler(BaseHandler):
-    def get(self, template_variables = {}):
-        user_info = self.current_user
-        template_variables["static_path"] = self.static_path
-        template_variables["user_info"] = user_info
-        p = int(self.get_argument("p", "1"))
-
-        all_cars1 = self.car_data_model.get_car_models_by_sort("热门车", current_page = p)
-        template_variables["all_cars1"] = all_cars1
-       
-        self.render(self.template_path+"review.html", **template_variables)
 
 class BbsHandler(BaseHandler):
     def get(self, template_variables = {}):

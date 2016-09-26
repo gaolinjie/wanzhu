@@ -57,24 +57,12 @@ class BaseHandler(tornado.web.RequestHandler):
         return self.application.post_model
 
     @property
-    def nowfeed_model(self):
-        return self.application.nowfeed_model
-
-    @property
-    def newsfeed_model(self):
-        return self.application.newsfeed_model
-
-    @property
     def reply_model(self):
         return self.application.reply_model
 
     @property
     def tag_model(self):
         return self.application.tag_model
-
-    @property
-    def car_data_model(self):
-        return self.application.car_data_model
 
     @property
     def post_tag_model(self):

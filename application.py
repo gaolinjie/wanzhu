@@ -58,7 +58,6 @@ class Application(tornado.web.Application):
             (r"/(orca\.txt)", tornado.web.StaticFileHandler, dict(path = settings["static_path"])),
 
             (r"/", handler.index.IndexHandler),
-            (r"/reviews", handler.index.ReviewsHandler),
             (r"/bbs", handler.index.BbsHandler),
             (r"/new", handler.index.NewHandler),
             (r"/t/(.*)", handler.index.TagHandler), 
@@ -76,22 +75,10 @@ class Application(tornado.web.Application):
             (r"/admin/user/new", handler.admin.UserNewAdminHandler),
             (r"/admin/user/edit/(\d+)", handler.admin.UserEditAdminHandler),
             (r"/admin/user/delete/(\d+)", handler.admin.UserDeleteAdminHandler),
-            (r"/admin/newsfeeds", handler.admin.NewsfeedsAdminHandler),
-            (r"/admin/newsfeed/new", handler.admin.NewsfeedNewAdminHandler),
-            (r"/admin/newsfeed/edit/(\d+)", handler.admin.NewsfeedEditAdminHandler),
-            (r"/admin/nowfeeds", handler.admin.NowfeedsAdminHandler),
-            (r"/admin/nowfeed/new", handler.admin.NowfeedNewAdminHandler),
-            (r"/admin/nowfeed/edit/(\d+)", handler.admin.NowfeedEditAdminHandler),
-            (r"/admin/nowfeed/delete/(\d+)", handler.admin.NowfeedDeleteAdminHandler),
             (r"/admin/tags", handler.admin.TagsAdminHandler),
             (r"/admin/tag/new", handler.admin.TagNewAdminHandler),
             (r"/admin/tag/edit/(\d+)", handler.admin.TagEditAdminHandler),
             (r"/admin/tag/delete/(\d+)", handler.admin.TagDeleteAdminHandler),
-            (r"/admin/carbrands", handler.admin.CarBrandsAdminHandler),
-            (r"/admin/carvenders", handler.admin.CarVendersAdminHandler),
-            (r"/admin/carmodels", handler.admin.CarModelsAdminHandler),
-            (r"/admin/cardata/new", handler.admin.CarDataNewAdminHandler),
-            (r"/admin/cardata/edit/(\d+)", handler.admin.CarDataEditAdminHandler),
             (r"/api/signin", handler.api.SigninApiHandler),
             (r"/api/signout", handler.api.SignoutApiHandler),
             (r"/api/setting/password", handler.api.SettingPasswordApiHandler),
@@ -114,12 +101,9 @@ class Application(tornado.web.Application):
         # Have one global model for db query
         self.user_model = self.loader.use("user.model")
         self.post_model = self.loader.use("post.model")
-        self.nowfeed_model = self.loader.use("nowfeed.model")
-        self.newsfeed_model = self.loader.use("newsfeed.model")
         self.reply_model = self.loader.use("reply.model")
         self.tag_model = self.loader.use("tag.model")
         self.post_tag_model = self.loader.use("post_tag.model")
-        self.car_data_model = self.loader.use("car_data.model")
 
         # Have one global session controller
         self.session_manager = SessionManager(settings["cookie_secret"], ["127.0.0.1:11211"], 0)
